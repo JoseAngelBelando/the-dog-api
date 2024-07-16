@@ -5,3 +5,30 @@ body {
   background-color: #111;
   font-family: sans-serif;
 }
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: white;
+}
+
+.container {
+  text-align: center;
+  padding: 20px;
+  background-color: aliceblue;
+  border-radius: 8px;
+}
+
+select, button {
+  margin: 10px;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+#dog-image img {
+  margin-top: 20px;
+  max-width: 100%;
+  border-radius: 0.5rem;
+}
