@@ -1,17 +1,15 @@
 html {
   scroll-behavior: smooth;
 }
-body {
-  background-color: #111;
-  font-family: sans-serif;
-}
+
 body {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
-  background-color: white;
+  font-family: sans-serif;
+  background-color: #111;
 }
 
 .container {

@@ -9,7 +9,8 @@ const fetchBreeds = async () => {
   // Seleccionamos el elemento <select> en el HTML
   const breedSelect = document.getElementById('breed-select');
 
-  // Creamos una lista de razas. Creamos un array vacio
+  // Creamos una lista de razas. Creamos un array vacio.
+  // hasOwnProperty se usa para verificar que la propiedad breed pertenece directamente al objeto data.message y no se hereda de su prototipo.
   const breeds = [];
   for (const breed in data.message) {
     if (data.message.hasOwnProperty(breed)) {
