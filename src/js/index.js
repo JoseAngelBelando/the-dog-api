@@ -1,33 +1,6 @@
 // El styles lo importamos aquí, ya se carga después al compilar todo
 import '../scss/styles.scss';
 // Función para obtener las razas de perros
-const fetchBreeds = async () => {
-  // Hacemos una solicitud a la API
-  const response = await fetch('https://dog.ceo/api/breeds/list/all');
-  // Convertimos la respuesta en JSON
-  const data = await response.json();
-  // Seleccionamos el elemento <select> en el HTML
-  const breedSelect = document.getElementById('breed-select');
-
-  // Creamos una lista de razas. Creamos un array vacio.
-  // hasOwnProperty se usa para verificar que la propiedad breed pertenece directamente al objeto data.message y no se hereda de su prototipo.
-  const breeds = [];
-  for (const breed in data.message) {
-    if (data.message.hasOwnProperty(breed)) {
-      breeds.push(breed);
-    }
-  }
-
-  // Añadimos cada raza como una opción en el <select>
-  for (const breed of breeds) {
-    const option = document.createElement('option');
-    option.value = breed;
-    option.textContent = breed;
-    breedSelect.appendChild(option);
-  }
-};
-
-// Función para obtener una imagen de perro
 const fetchDogImage = async breed => {
   // Hacemos una solicitud a la API para obtener una imagen
   const response = await fetch(`https://dog.ceo/api/breed/${breed}/images/random`);
@@ -37,6 +10,35 @@ const fetchDogImage = async breed => {
   const dogImageDiv = document.getElementById('dog-image');
   // Añadimos la imagen al <div>
   dogImageDiv.innerHTML = `<img src="${data.message}" alt="Dog Image">`;
+};
+
+const breedsSelect = document.getElementById('breed-select'); // Actualizamos el ID aquí para mantener consistencia
+
+const printAllBreeds = breeds => {
+  const fragment = document.createDocumentFragment();
+  breeds.forEach(breed => {
+    const newOption = document.createElement('option');
+    newOption.value = breed; // Añadimos el valor de la opción
+    newOption.textContent = breed;
+    fragment.append(newOption);
+  });
+
+  breedsSelect.append(fragment);
+};
+
+const fetchBreeds = async () => {
+  try {
+    // Hacemos una solicitud a la API
+    const response = await fetch('https://dog.ceo/api/breeds/list/all');
+    // Convertimos la respuesta en JSON
+    const data = await response.json();
+    // Obtenemos todas las razas como un array
+    const allBreeds = Object.keys(data.message);
+    // Imprimimos todas las razas en el <select>
+    printAllBreeds(allBreeds);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // Añadimos un event listener al botón
